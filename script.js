@@ -2,7 +2,6 @@ let answer = "hello";
 let len = answer.length;
 
 let input = document.querySelector('input');
-
 let win = document.querySelector('#win');
 let hint = document.querySelector('#hint');
 let attempt = document.querySelector('#attempt');
@@ -26,17 +25,18 @@ function letterinstr(c) {
 }
 
 function addGuessDisplay() {
-
-	hint.innerHTML += "</br>";
+	
+	let cat = ""
 	for (var i = 0; i < len; i++) {
 		if (input.value.charAt(i) != answer.charAt(i) && !(letterinstr(input.value.charAt(i))) ) {
-			hint.innerHTML += '<span style="color: #595959">' + input.value.charAt(i) + "</span>";
+			cat += '<span style="color: #595959">' + input.value.charAt(i) + "</span>";
 		} else if (input.value.charAt(i) != answer.charAt(i) && (letterinstr(input.value.charAt(i))) ) {
-			hint.innerHTML += '<span style="color: #bebe00">' + input.value.charAt(i) + "</span>";
+			cat += '<span style="color: #bebe00">' + input.value.charAt(i) + "</span>";
 		} else if (input.value.charAt(i) == answer.charAt(i)) {
-			hint.innerHTML += '<span style="color: #00ff00">' + input.value.charAt(i) + "</span>";
+			cat += '<span style="color: #00ff00">' + input.value.charAt(i) + "</span>";
 		}
 	}
+	hint.innerHTML += cat + "</br>";
 	
 }
 
@@ -49,15 +49,12 @@ function validateInput() {
 	}
 
 	for (var i = 0; i < len; i++) {
-		
 		let c = input.value.charAt(i)
-
 		if (c.toUpperCase() == c.toLowerCase()) {
 			console.log("hi");
 			isvalid = false;
 			break;
 		}
-
 	}
 
 	return isvalid;
@@ -65,7 +62,9 @@ function validateInput() {
 }
 
 function checkAnswer(event) {
+	
 	event.preventDefault();
+
 	if (!exit) {
 		if (validateInput()) {
 			addGuessDisplay();
@@ -81,7 +80,6 @@ function checkAnswer(event) {
 			if (tries > 1) {
 				attempt.innerHTML += "s";
 			}
-
 		}
 	}
 }

@@ -25,27 +25,56 @@ function letterinstr(c) {
 
 }
 
+function addGuessDisplay() {
+
+	hint.innerHTML += "</br>";
+	for (var i = 0; i < len; i++) {
+		if (input.value.charAt(i) != answer.charAt(i) && !(letterinstr(input.value.charAt(i))) ) {
+			hint.innerHTML += '<span style="color: #595959">' + input.value.charAt(i) + "</span>";
+		} else if (input.value.charAt(i) != answer.charAt(i) && (letterinstr(input.value.charAt(i))) ) {
+			hint.innerHTML += '<span style="color: #bebe00">' + input.value.charAt(i) + "</span>";
+		} else if (input.value.charAt(i) == answer.charAt(i)) {
+			hint.innerHTML += '<span style="color: #00ff00">' + input.value.charAt(i) + "</span>";
+		}
+	}
+	
+}
+
+function validateInput() {
+	
+	let isvalid = true;
+
+	if (input.value.length != len) {
+		return false;
+	}
+
+	for (var i = 0; i < len; i++) {
+		
+		let c = input.value.charAt(i)
+
+		if (c.toUpperCase() == c.toLowerCase()) {
+			console.log("hi");
+			isvalid = false;
+			break;
+		}
+
+	}
+
+	return isvalid;
+
+}
+
 function checkAnswer(event) {
 	event.preventDefault();
 	if (!exit) {
-		if (input.value.length == len) {
+		if (validateInput()) {
+			addGuessDisplay();
+			tries++;
 			if (input.value == answer) {
-				tries++;
 				win.innerHTML = "You won!";
 				exit = true;
 			} else {
-				tries++;
 				win.innerHTML = "Not quite right!";
-				hint.innerHTML += "</br>";
-				for (var i = 0; i < len; i++) {
-					if (input.value.charAt(i) != answer.charAt(i) && !(letterinstr(input.value.charAt(i))) ) {
-						hint.innerHTML += '<span style="color: #595959">' + input.value.charAt(i) + "</span>";
-					} else if (input.value.charAt(i) != answer.charAt(i) && (letterinstr(input.value.charAt(i))) ) {
-						hint.innerHTML += '<span style="color: #bebe00">' + input.value.charAt(i) + "</span>";
-					} else if (input.value.charAt(i) == answer.charAt(i)) {
-						hint.innerHTML += '<span style="color: #00ff00">' + input.value.charAt(i) + "</span>";
-					}
-				}
 			}
 
 			attempt.innerHTML = tries + " attempt";

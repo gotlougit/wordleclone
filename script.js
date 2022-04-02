@@ -52,7 +52,6 @@ function validateInput() {
 	for (var i = 0; i < len; i++) {
 		let c = input.value.charAt(i)
 		if (c.toUpperCase() == c.toLowerCase()) {
-			console.log("hi");
 			isvalid = false;
 			break;
 		}
@@ -65,10 +64,12 @@ function validateInput() {
 function checkAnswer(event) {
 	
 	event.preventDefault();
+	
 
 	if (!exit) {
 		if (validateInput()) {
 			addGuessDisplay();
+			
 			tries++;
 			
 			if (input.value == answer) {
@@ -77,16 +78,16 @@ function checkAnswer(event) {
 			} else {
 				win.innerHTML = "Not quite right!";
 			}
-
+			if (tries >= maxtries && !exit) {
+				win.innerHTML = "You lost! Better luck next time!";
+				exit = true;
+			}
 			attempt.innerHTML = tries + " attempt";
 			if (tries > 1) {
 				attempt.innerHTML += "s";
 			}
 
-			if (tries > maxtries) {
-				win.innerHTML = "You lost! Better luck next time!";
-				exit = true;
-			}
+			
 		}
 	}
 }

@@ -1,4 +1,5 @@
 let answer = "hello";
+let maxtries = 6;
 let len = answer.length;
 
 let input = document.querySelector('input');
@@ -69,6 +70,7 @@ function checkAnswer(event) {
 		if (validateInput()) {
 			addGuessDisplay();
 			tries++;
+			
 			if (input.value == answer) {
 				win.innerHTML = "You won!";
 				exit = true;
@@ -79,6 +81,11 @@ function checkAnswer(event) {
 			attempt.innerHTML = tries + " attempt";
 			if (tries > 1) {
 				attempt.innerHTML += "s";
+			}
+
+			if (tries > maxtries) {
+				win.innerHTML = "You lost! Better luck next time!";
+				exit = true;
 			}
 		}
 	}

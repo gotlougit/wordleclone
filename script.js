@@ -64,14 +64,11 @@ function validateInput() {
 function checkAnswer(event) {
 	
 	event.preventDefault();
-	
 
 	if (!exit) {
 		if (validateInput()) {
 			addGuessDisplay();
-			
 			tries++;
-			
 			if (input.value == answer) {
 				win.innerHTML = "You won!";
 				exit = true;
@@ -86,8 +83,6 @@ function checkAnswer(event) {
 			if (tries > 1) {
 				attempt.innerHTML += "s";
 			}
-
-			
 		}
 	}
 }

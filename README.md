@@ -9,3 +9,5 @@ This is my spin on [Wordle](https://www.nytimes.com/games/wordle/index.html), th
 - Was not in answer at all (Indicated by grey box)
 
 It's not as pretty, and it's ephemeral, unlike the original, but through more development I hope to learn more about web development and associated best practices.
+
+The allowed word list was taken from [this very helpful repo](https://github.com/tabatkins/wordle-list). As for the answers, for now I just have it pick a random word from the allowed word list.

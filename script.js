@@ -1,5 +1,13 @@
 let exit = false;
 let url = "words";
+let maxtries = 6;
+	
+let input = document.querySelector('input');
+let win = document.querySelector('#win');
+let hint = document.querySelector('#hint');
+let attempt = document.querySelector('#attempt');
+	
+let tries = 0;
 
 fetch(url)
 .then(response => response.text())
@@ -53,7 +61,7 @@ function validateInput(str, len) {
 
 }
 
-function checkAnswer(event, input, input, win, hint, attempt, tries, answer, len, maxtries) {
+function checkAnswer(event, answer, len, maxtries) {
 	
 	event.preventDefault();
 
@@ -80,17 +88,7 @@ function checkAnswer(event, input, input, win, hint, attempt, tries, answer, len
 }
 
 function main(wordlist) {
-
-	let maxtries = 6;
 	
-	let form = document.querySelector('form');
-	let input = document.querySelector('input');
-	let win = document.querySelector('#win');
-	let hint = document.querySelector('#hint');
-	let attempt = document.querySelector('#attempt');
-	
-	let tries = 0;
-
 	let wordlen = wordlist.length;
 	let randomword = Math.floor(Math.random() * wordlen);
 
@@ -101,6 +99,7 @@ function main(wordlist) {
 	input.setAttribute("maxlength", len);
 	hint.innerHTML = "Word is of length: " + len + "</br>";
 	
-	form.addEventListener("submit", function() { checkAnswer(event, input, input, win, hint, attempt, tries, answer, len, maxtries, wordlist); });
+	let form = document.querySelector('form');
+	form.addEventListener("submit", function() { checkAnswer(event, answer, len, wordlist); });
 
 }

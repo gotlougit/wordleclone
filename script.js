@@ -1,20 +1,12 @@
-let maxtries = 6;
-
-let input = document.querySelector('input');
-let win = document.querySelector('#win');
-let hint = document.querySelector('#hint');
-let attempt = document.querySelector('#attempt');
-
 let exit = false;
-let tries = 0;
+let url = "words";
 
-let answer = "hello";
-let len = answer.length;
+fetch(url)
+.then(response => response.text())
+.then(wordlist => wordlist.split('\n'))
+.then(wordlist => main(wordlist));
 
-input.setAttribute("maxlength", len);
-hint.innerHTML = "Word is of length: " + len + "</br>";
-
-function letterinstr(c) {
+function letterinstr(c, len, answer) {
 	
 	let isin = false;
 
@@ -29,13 +21,13 @@ function letterinstr(c) {
 
 }
 
-function addGuessDisplay(answer, guess) {
+function addGuessDisplay(answer, guess, len, hint) {
 	
 	let cat = ""
 	for (var i = 0; i < len; i++) {
-		if (guess.charAt(i) != answer.charAt(i) && !(letterinstr(guess.charAt(i))) ) {
+		if (guess.charAt(i) != answer.charAt(i) && !(letterinstr(guess.charAt(i), len, answer)) ) {
 			cat += '<span style="color: #595959">' + guess.charAt(i) + "</span>";
-		} else if (guess.charAt(i) != answer.charAt(i) && (letterinstr(guess.charAt(i))) ) {
+		} else if (guess.charAt(i) != answer.charAt(i) && (letterinstr(guess.charAt(i), len, answer)) ) {
 			cat += '<span style="color: #bebe00">' + guess.charAt(i) + "</span>";
 		} else if (guess.charAt(i) == answer.charAt(i)) {
 			cat += '<span style="color: #00ff00">' + guess.charAt(i) + "</span>";
@@ -45,7 +37,7 @@ function addGuessDisplay(answer, guess) {
 	
 }
 
-function validateInput(str) {
+function validateInput(str, len) {
 	
 	let isvalid = true;
 	
@@ -61,13 +53,13 @@ function validateInput(str) {
 
 }
 
-function checkAnswer(event) {
+function checkAnswer(event, input, input, win, hint, attempt, tries, answer, len, maxtries) {
 	
 	event.preventDefault();
 
 	if (!exit) {
-		if (validateInput(input.value)) {
-			addGuessDisplay(answer, input.value);
+		if (validateInput(input.value, len)) {
+			addGuessDisplay(answer, input.value, len, hint);
 			tries++;
 			if (input.value == answer) {
 				win.innerHTML = "You won!";
@@ -85,4 +77,30 @@ function checkAnswer(event) {
 			}
 		}
 	}
+}
+
+function main(wordlist) {
+
+	let maxtries = 6;
+	
+	let form = document.querySelector('form');
+	let input = document.querySelector('input');
+	let win = document.querySelector('#win');
+	let hint = document.querySelector('#hint');
+	let attempt = document.querySelector('#attempt');
+	
+	let tries = 0;
+
+	let wordlen = wordlist.length;
+	let randomword = Math.floor(Math.random() * wordlen);
+
+	let answer = wordlist[randomword];
+	console.log(answer);
+	let len = answer.length;
+	
+	input.setAttribute("maxlength", len);
+	hint.innerHTML = "Word is of length: " + len + "</br>";
+	
+	form.addEventListener("submit", function() { checkAnswer(event, input, input, win, hint, attempt, tries, answer, len, maxtries, wordlist); });
+
 }

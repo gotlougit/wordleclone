@@ -11,6 +11,7 @@ let exit = false;
 let tries = 0;
 
 input.setAttribute("maxlength", len);
+hint.innerHTML = "Word is of length: " + len + "</br>";
 
 function letterinstr(c) {
 	

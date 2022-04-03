@@ -46,7 +46,7 @@ function addGuessDisplay(answer, guess, len, hint) {
 }
 
 function validateInput(str, len) {
-	
+
 	let isvalid = true;
 	
 	for (var i = 0; i < len; i++) {
@@ -56,12 +56,12 @@ function validateInput(str, len) {
 			break;
 		}
 	}
-
+	
 	return isvalid;
 
 }
 
-function checkAnswer(event, answer, len, maxtries) {
+function checkAnswer(event, answer, len, wordlist) {
 	
 	event.preventDefault();
 
@@ -83,7 +83,7 @@ function checkAnswer(event, answer, len, maxtries) {
 			if (tries > 1) {
 				attempt.innerHTML += "s";
 			}
-		}
+		} 	
 	}
 }
 

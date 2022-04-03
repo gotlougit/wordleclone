@@ -10,6 +10,8 @@ let attempt = document.querySelector('#attempt');
 let exit = false;
 let tries = 0;
 
+input.setAttribute("maxlength", len);
+
 function letterinstr(c) {
 	
 	let isin = false;
@@ -44,11 +46,7 @@ function addGuessDisplay() {
 function validateInput() {
 	
 	let isvalid = true;
-
-	if (input.value.length != len) {
-		return false;
-	}
-
+	
 	for (var i = 0; i < len; i++) {
 		let c = input.value.charAt(i)
 		if (c.toUpperCase() == c.toLowerCase()) {

@@ -45,28 +45,12 @@ function addGuessDisplay(answer, guess, len, hint) {
 	
 }
 
-function validateInput(str, len) {
-
-	let isvalid = true;
-	
-	for (var i = 0; i < len; i++) {
-		let c = str.charAt(i)
-		if (c.toUpperCase() == c.toLowerCase()) {
-			isvalid = false;
-			break;
-		}
-	}
-	
-	return isvalid;
-
-}
-
 function checkAnswer(event, answer, len, wordlist) {
 	
 	event.preventDefault();
 
 	if (!exit) {
-		if (validateInput(input.value, len)) {
+		if (wordlist.includes(input.value)) {
 			addGuessDisplay(answer, input.value, len, hint);
 			tries++;
 			if (input.value == answer) {

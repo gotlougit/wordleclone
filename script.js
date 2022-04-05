@@ -14,28 +14,13 @@ fetch(url)
 .then(wordlist => wordlist.split('\n'))
 .then(wordlist => main(wordlist));
 
-function letterinstr(c, len, answer) {
-	
-	let isin = false;
-
-	for (var i = 0; i < len; i++) {
-		if (c == answer.charAt(i)) {
-			isin = true;	
-			break;
-		}
-	}	
-
-	return isin;
-
-}
-
 function addGuessDisplay(answer, guess, len, hint) {
 	
 	let cat = ""
 	for (var i = 0; i < len; i++) {
-		if (guess.charAt(i) != answer.charAt(i) && !(letterinstr(guess.charAt(i), len, answer)) ) {
+		if (guess.charAt(i) != answer.charAt(i) && !(answer.includes(guess.charAt(i))) ) {
 			cat += '<span style="color: #595959">' + guess.charAt(i) + "</span>";
-		} else if (guess.charAt(i) != answer.charAt(i) && (letterinstr(guess.charAt(i), len, answer)) ) {
+		} else if (guess.charAt(i) != answer.charAt(i) && (answer.includes(guess.charAt(i))) ) {
 			cat += '<span style="color: #bebe00">' + guess.charAt(i) + "</span>";
 		} else if (guess.charAt(i) == answer.charAt(i)) {
 			cat += '<span style="color: #00ff00">' + guess.charAt(i) + "</span>";

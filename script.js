@@ -48,6 +48,7 @@ function addGuessDisplay(answer, guess, len, hint) {
 function checkAnswer(event, answer, len, wordlist) {
 	
 	event.preventDefault();
+	input.value = input.value.toLowerCase();
 
 	if (!exit) {
 		if (wordlist.includes(input.value)) {
